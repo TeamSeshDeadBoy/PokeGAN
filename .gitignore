@@ -1,5 +1,6 @@
-data/
+data/pokemon
 __pycache__
 logs/*
 # *.pth
 .mypy_cache*
+.env
