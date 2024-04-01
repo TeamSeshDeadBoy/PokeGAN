@@ -4,3 +4,4 @@ logs/*
 # *.pth
 .mypy_cache*
 .env
+notebooks/temp*
