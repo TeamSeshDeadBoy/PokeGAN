@@ -2,10 +2,10 @@
 import torch
 from math import log2
 
-START_TRAIN_AT_IMG_SIZE = 4
+START_TRAIN_AT_IMG_SIZE = 32
 DATASET = 'data/pokemon/raw'
-CHECKPOINT_GEN = "generator.pth"
-CHECKPOINT_CRITIC = "critic.pth"
+CHECKPOINT_GEN = "models/ProGan/cached/generator.pth"
+CHECKPOINT_CRITIC = "models/ProGan/cached/critic.pth"
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 SAVE_MODEL = True
 LOAD_MODEL = True
@@ -20,3 +20,4 @@ LAMBDA_GP = 10
 PROGRESSIVE_EPOCHS = [10] * len(BATCH_SIZES)
 FIXED_NOISE = torch.randn(8, Z_DIM, 1, 1).to(DEVICE)
 NUM_WORKERS = 4
+GENERATE_EXAMPLES = True

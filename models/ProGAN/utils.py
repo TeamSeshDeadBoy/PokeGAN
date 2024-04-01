@@ -75,16 +75,17 @@ def seed_everything(seed=42):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
 
-def generate_examples(gen, steps, truncation=0.7, n=100):
+def generate_examples(gen, steps, model_name="others", truncation=0.7, n=100):
     """
     Tried using truncation trick here but not sure it actually helped anything, you can
     remove it if you like and just sample from torch.randn
     """
+    print("=> Generating Examples")
     gen.eval()
     alpha = 1.0
     for i in range(n):
         with torch.no_grad():
             noise = torch.tensor(truncnorm.rvs(-truncation, truncation, size=(1, config.Z_DIM, 1, 1)), device=config.DEVICE, dtype=torch.float32)
             img = gen(noise, alpha, steps)
-            save_image(img*0.5+0.5, f"saved_examples/img_{i}.png")
+            save_image(img*0.5+0.5, f"images/{model_name}/img_{i}.png")
     gen.train()

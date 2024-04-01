@@ -178,6 +178,9 @@ def main():
         loader, dataset = get_loader(4*2**step)
         print(f"Image size: {4*2**step}")
         for epoch in range(num_epochs):
+            if config.GENERATE_EXAMPLES:
+                generate_examples(gen, steps=step, model_name="ProGAN")
+                
             print(f"Epoch: [{epoch}/{num_epochs}]")
             tensorboard_step, alpha = train_fn(
                 critic, 
@@ -197,7 +200,7 @@ def main():
             if config.SAVE_MODEL:
                 save_checkpoint(gen, opt_gen, filename=config.CHECKPOINT_GEN)
                 save_checkpoint(critic, opt_critic, filename=config.CHECKPOINT_CRITIC)
-        
+
         step += 1
     
 if __name__=="__main__":
