@@ -2,13 +2,12 @@
 
 My implementation of various GAN model architectures generating Pokemon images.  
 Built fully with PyTorch.  
-Why Pokemon? 'cause Pokemon  
-
-</br>
+ Why Pokemon?  
+ Because.  
 
 ## Project Structure
 
-```txt
+```
 [data]           <- Folder for Pokemon Generations dataset   
   |
   |_____[pokemon.txt]           <- A txt File of Pokemon classes and class info
