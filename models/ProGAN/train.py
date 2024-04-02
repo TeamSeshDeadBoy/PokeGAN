@@ -52,7 +52,7 @@ class PokemonData(Dataset):
     
     def __getitem__(self, index: int):
         img = self.load_image(index)
-        img_name = self.paths[index].name.split('.')[0]
+        # img_name = self.paths[index].name.split('.')[0]
         img_name = 3
         class_name = self.classes[min(720, img_name)]
         class_idx = self.classes_to_idx[class_name]
@@ -162,7 +162,7 @@ def main():
     scaler_gen = torch.cuda.amp.GradScaler()
     scaler_critic = torch.cuda.amp.GradScaler()
     
-    writer = SummaryWriter(f"logs/gan")
+    writer = SummaryWriter(config.LOGS_DIR)
     
     if config.LOAD_MODEL:
         load_checkpoint(config.CHECKPOINT_GEN, gen, opt_gen, config.LEARNING_RATE)
