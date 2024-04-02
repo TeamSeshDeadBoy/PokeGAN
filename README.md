@@ -61,3 +61,16 @@ A Non-Convolutional NN, consists of two models:
 
 This Model is *extremely* simple, and consists of basically Linear Layers, followed by some LeakyReLU layers. I didnt expect it to perform well, as this model architecture was available 20-30 years ago. It manages to generally grasp a distribution, and on 64x64 image resolution it provides a bleak stylized colourful mess, barely resembling a pokemon.
 
+![alt text](images/markdown_cache/image2.png)
+
+### DCGAN
+
+**DCGAN** Is a GAN architecture that utilized Convolutional layers and resembles a CNN-like structure (*although we do not use Pooling layers or Flatten layers*).
+It's generator structure is simple and involves transforming a latent noise vector into a 64x64 image, generated based on noise distribution of latent vector.  
+The discriminator (*also called a **critic***) is the reverse of a generator.
+DcGAN solves the same loss function, as a simple GAN:  
+
+- The discriminator tries to maximise the distance between a probability of a given image being fake and it being real
+- The Generator tries to "fool" the Discriminator and minimise a probability of a Discriminator realizing a given image is fake
+
+![alt text](images/markdown_cache/image3.png)
