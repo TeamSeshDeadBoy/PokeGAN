@@ -5,3 +5,5 @@ logs/*
 .mypy_cache*
 .env
 notebooks/temp*
+
+models/*/logs/*
