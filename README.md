@@ -48,3 +48,16 @@ Built fully with PyTorch.
 My implementation of ProGAN architecture, built with **PyTorch**.  
 Generates images based on a *Pokemon Generations Dataset* [kaggle](https://www.kaggle.com/datasets/truthisneverlinear/pokemon-generations-image-dataset)  
 Due to my limitations in GPU power, i was able to train it only for small number of epochs (approx. 50 for 32x32 img resolutions, each taking about 1.5hr on my 1060 TI laptop GPU v-v)  
+However, it still is the most advanced model in this repository, and, with enough computational resources, you can train it to create good images in up to 1024x1024 px resolution!
+
+## Simpler models
+
+### Simple GAN
+
+A Non-Convolutional NN, consists of two models:  
+
+- Discriminator (Determines if image is real or fake)  
+- Generator (Generates images resembling real from a random normal distribution)
+
+This Model is *extremely* simple, and consists of basically Linear Layers, followed by some LeakyReLU layers. I didnt expect it to perform well, as this model architecture was available 20-30 years ago. It manages to generally grasp a distribution, and on 64x64 image resolution it provides a bleak stylized colourful mess, barely resembling a pokemon.
+
