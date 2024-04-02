@@ -6,6 +6,7 @@ import data
 from torch.utils.tensorboard import SummaryWriter
 import torch.nn as nn
 import torchvision
+import utils
 
 # Instantiating a Discriminator and a Generator models with config hyperparamethers, sending them to target Device
 disc = Discriminator(config.INPUT_SIZE).to(config.DEVICE)
@@ -38,6 +39,10 @@ loss = nn.BCELoss()
 optimizer_gen = torch.optim.Adam(gen.parameters(), lr=config.LR)
 optimizer_disc = torch.optim.Adam(disc.parameters(), lr=config.LR)
 
+if config.LOAD_MODEL:
+        utils.load_checkpoint(config.CHECKPOINT_GEN, gen, optimizer_gen, config.LR)
+        utils.load_checkpoint(config.CHECKPOINT_CRITIC, loss, optimizer_disc, config.LR)
+
 # Training Process
 for epoch in range(config.NUM_EPOCHS):
     for batch_idx, (real, _) in enumerate(pokemon_dataloader):
@@ -69,10 +74,13 @@ for epoch in range(config.NUM_EPOCHS):
         optimizer_gen.step()
         
         if batch_idx == 0:
-            print(
-                f"Epoch: [{epoch}/{config.NUM_EPOCHS}] \n",
-                f"Loss D: {lossD:.4f}, {lossG:.4f}"
-            )
+            if config.SAVE_MODEL:
+                utils.save_checkpoint(gen, optimizer_gen, filename=config.CHECKPOINT_GEN)
+                utils.save_checkpoint(loss, optimizer_disc, filename=config.CHECKPOINT_CRITIC)
+                
+            print(f"Epoch: [{epoch}/{config.NUM_EPOCHS}] \n",f"Loss D: {lossD:.4f}, {lossG:.4f}")
+            
+            utils.generate_examples(gen=gen, model_name="GAN", n=20)
             
             with torch.no_grad():
                 fake =  gen(config.FIXED_NOISE).reshape(-1, config.IMAGE_CHANNELS, config.IMAGE_SIZE, config.IMAGE_SIZE)
